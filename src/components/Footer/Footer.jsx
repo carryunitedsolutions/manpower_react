@@ -146,6 +146,9 @@ const Footer = () => {
         <div className={styles.divider}></div>
         <p className={styles.copyright}>
           © {data.copyright.year} {data.company.name}. {data.copyright.text}
+          <span className={styles.developerCredit}>
+            Developed by Carry United Solutions Pvt. Ltd.
+          </span>
         </p>
       </div>
     </footer>
