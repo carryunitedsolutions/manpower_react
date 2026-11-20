@@ -3,13 +3,12 @@ import MainLayout from '../../components/common/Layout/MainLayout';
 import SEOHead from '../../components/common/SEOHead/SEOHead';
 import Button from '../../components/ui/Button/Button';
 import Card from '../../components/ui/Card/Card';
-import Badge from '../../components/ui/Badge/Badge';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import styles from './Services.module.css';
 
 const Services = () => {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const [activeService, setActiveService] = useState('airport');
 
   const services = [

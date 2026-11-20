@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import MainLayout from '../../components/common/Layout/MainLayout';
 import SEOHead from '../../components/common/SEOHead/SEOHead';
 import Button from '../../components/ui/Button/Button';
 import Card from '../../components/ui/Card/Card';
 import Badge from '../../components/ui/Badge/Badge';
-import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner';
 import JobApplicationModal from '../../components/careers/JobApplicationModal/JobApplicationModal';
 import CVBuilder from '../../components/careers/CVBuilder/CVBuilder';
-import { useLanguage } from '../../context/LanguageContext';
 import styles from './Careers.module.css';
 
 const Careers = () => {
-  const { t, isRTL } = useLanguage();
-  const [activeTab, setActiveTab] = useState('all');
   const [selectedLocation, setSelectedLocation] = useState('all');
   const [selectedIndustry, setSelectedIndustry] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredJobs, setFilteredJobs] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
   const [showCVBuilder, setShowCVBuilder] = useState(false);
@@ -96,8 +90,6 @@ const Careers = () => {
   );
 
   const locations = ['all', 'Jeddah', 'Riyadh', 'Dammam', 'Madina'];
-  const industries = ['all', 'airport', 'construction', 'corporate', 'catering', 'facility', 'logistics'];
-
   const testimonials = [
     {
       name: 'Ahmed Al-Rashid',
@@ -173,30 +165,23 @@ const Careers = () => {
     }
   ];
 
-  useEffect(() => {
-    filterJobs();
-  }, [activeTab, selectedLocation, selectedIndustry, searchTerm]);
-
-  const filterJobs = () => {
-    let filtered = allJobs;
-
-    if (selectedLocation !== 'all') {
-      filtered = filtered.filter(job => job.location === selectedLocation);
+  const filteredJobs = allJobs.filter((job) => {
+    if (selectedLocation !== 'all' && job.location !== selectedLocation) {
+      return false;
     }
 
-    if (selectedIndustry !== 'all') {
-      filtered = filtered.filter(job => job.industry === selectedIndustry);
+    if (selectedIndustry !== 'all' && job.industry !== selectedIndustry) {
+      return false;
     }
 
     if (searchTerm) {
-      filtered = filtered.filter(job => 
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.description.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      const normalizedSearch = searchTerm.toLowerCase();
+      return job.title.toLowerCase().includes(normalizedSearch) ||
+        job.description.toLowerCase().includes(normalizedSearch);
     }
 
-    setFilteredJobs(filtered);
-  };
+    return true;
+  });
 
   const handleQuickApply = (job) => {
     setSelectedJob(job);
@@ -378,9 +363,7 @@ const Careers = () => {
 
           {/* Job Cards */}
           <div className={styles.jobsGrid}>
-            {loading ? (
-              <LoadingSpinner />
-            ) : filteredJobs.length > 0 ? (
+            {filteredJobs.length > 0 ? (
               filteredJobs.map(job => (
                 <Card key={job.id} className={styles.jobCard}>
                   <div className={styles.jobHeader}>

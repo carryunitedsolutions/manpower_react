@@ -9,7 +9,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import styles from './Clients.module.css';
 
 const Clients = () => {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
 
   const clients = [

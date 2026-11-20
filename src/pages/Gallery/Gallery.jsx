@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../context/LanguageContext';
 import { 
@@ -6,8 +6,6 @@ import {
   FilterList, 
   GridView, 
   ViewList,
-  Image,
-  Category,
   LocationOn,
   Person,
   CalendarToday
@@ -17,7 +15,7 @@ import SEOHead from '../../components/common/SEOHead/SEOHead';
 import styles from './Gallery.module.css';
 
 const Gallery = () => {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   const [viewMode, setViewMode] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -133,14 +131,6 @@ const Gallery = () => {
       month: 'long',
       day: 'numeric'
     });
-  };
-
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
   return (

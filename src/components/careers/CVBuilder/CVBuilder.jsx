@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import Button from '../../ui/Button/Button';
 import Input from '../../ui/Input/Input';
 import TextArea from '../../ui/Input/TextArea';
@@ -7,7 +6,6 @@ import Card from '../../ui/Card/Card';
 import styles from './CVBuilder.module.css';
 
 const CVBuilder = () => {
-  const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState(1);
   const [cvData, setCvData] = useState({
     personalInfo: {

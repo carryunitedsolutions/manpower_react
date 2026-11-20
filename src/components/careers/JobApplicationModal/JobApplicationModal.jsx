@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import Modal from '../../common/Modal/Modal';
 import Button from '../../ui/Button/Button';
 import Input from '../../ui/Input/Input';
@@ -7,7 +6,6 @@ import TextArea from '../../ui/Input/TextArea';
 import styles from './JobApplicationModal.module.css';
 
 const JobApplicationModal = ({ isOpen, onClose, jobTitle, jobId }) => {
-  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',

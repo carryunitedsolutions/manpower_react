@@ -9,7 +9,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import styles from './Contact.module.css';
 
 const Contact = () => {
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
   
   return (
     <MainLayout>
